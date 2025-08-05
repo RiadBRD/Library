@@ -1,60 +1,89 @@
 package com.project.Library.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="users")
 public class User {
-    
-    private Long Id;
-    private String Firstname;
-    private String Lastname;
-    private int Age;
-    private String Mobile;
 
-    
-    public User(Long id, String firstname, String lastname, int age, String mobile) {
-        Id = id;
-        Firstname = firstname;
-        Lastname = lastname;
-        Age = age;
-        Mobile = mobile;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+   
+
+    private String firstname;
+    private String lastname;
+    private int age;
+    private String mobile;
+
+    @OneToMany(mappedBy="borrower",cascade=CascadeType.ALL)
+    private List<Loan> loans;
+
+    public User(){}
+
+    public User(String firstname, String lastname, int age, String mobile) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.age = age;
+        this.mobile = mobile;
+        this.loans = new ArrayList();
     }
-    
+
     public Long getId() {
-        return Id;
+        return id;
     }
+
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
+
     public String getFirstname() {
-        return Firstname;
+        return firstname;
     }
+
     public void setFirstname(String firstname) {
-        Firstname = firstname;
+        this.firstname = firstname;
     }
+
     public String getLastname() {
-        return Lastname;
+        return lastname;
     }
+
     public void setLastname(String lastname) {
-        Lastname = lastname;
+        this.lastname = lastname;
     }
+
     public int getAge() {
-        return Age;
+        return age;
     }
+
     public void setAge(int age) {
-        Age = age;
+        this.age = age;
     }
+
     public String getMobile() {
-        return Mobile;
+        return mobile;
     }
+
     public void setMobile(String mobile) {
-        Mobile = mobile;
+        this.mobile = mobile;
     }
-    
-    
 
+    public List<Loan> getLoans() {
+        return loans;
+    }
 
-    
-    
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
 
 }
