@@ -2,16 +2,41 @@ package com.project.Library.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "loans")
+
 public class Loan {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User borrower;
+
+    @OneToOne
+    @JoinColumn(name = "book_id")
     private Book loanedBook;
+
     private LocalDateTime loanDate;
     private LocalDateTime dueDate;
     private final static int TimeOfLoan = 14;
-    
-    public Loan(Long id, User borrower, Book loanedBook, LocalDateTime loanDate, LocalDateTime dueDate) {
-        this.id = id;
+
+    public Loan() {
+
+    }
+
+    public Loan(User borrower, Book loanedBook, LocalDateTime loanDate) {
         this.borrower = borrower;
         this.loanedBook = loanedBook;
         this.loanDate = LocalDateTime.now();
@@ -62,7 +87,4 @@ public class Loan {
         return TimeOfLoan;
     }
 
-    
-
-    
 }
