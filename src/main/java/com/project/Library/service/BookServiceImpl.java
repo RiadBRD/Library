@@ -1,9 +1,12 @@
 package com.project.Library.service;
 
+import org.springframework.stereotype.Service;
+
 import com.project.Library.exceptions.InvalidBookException;
 import com.project.Library.model.Book;
 import com.project.Library.repository.BookRepository;
 
+@Service
 public class BookServiceImpl implements BookService {
 
     private BookRepository bookRepository;

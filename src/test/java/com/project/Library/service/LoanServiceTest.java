@@ -40,7 +40,7 @@ public class LoanServiceTest{
         });
 
         // When
-        Loan createdLoan = loanService.createLoan(expectedUser, expectedBook, loanDate);
+        Loan createdLoan = loanService.createLoan(new Loan(expectedUser, expectedBook, loanDate));
 
         // Then
         assertAll(
