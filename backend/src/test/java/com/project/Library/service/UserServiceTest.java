@@ -48,4 +48,6 @@ public class UserServiceTest {
         assertThrows(InvalidUserException.class, () -> userService.createUser(invalidUser));
     }
 
+    
+
 }
