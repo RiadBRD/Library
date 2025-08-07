@@ -1,5 +1,7 @@
 package com.project.Library.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.project.Library.exceptions.InvalidBookException;
@@ -23,6 +25,16 @@ public class BookServiceImpl implements BookService {
 
         return bookRepository.save(book);
 
+    }
+
+    @Override
+    public List<Book> getBooksByAuthor(String author) {
+        return this.bookRepository.findByAuthor(author);
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        return this.bookRepository.findAll();
     }
 
 }

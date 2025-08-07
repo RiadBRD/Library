@@ -12,9 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import java.util.Arrays;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.Library.model.Book;
 import com.project.Library.service.BookService;
@@ -36,7 +38,7 @@ public class BookControllerTest {
         public void createBook_ShouldReturnCreatedBook() throws Exception {
 
                 // Given
-                Book inputBook =  new Book("To Kill a Mockingbird", "Harper Lee",
+                Book inputBook = new Book("To Kill a Mockingbird", "Harper Lee",
                                 "A story about racial injustice in the Deep South.");
                 Book savedBook = new Book("To Kill a Mockingbird", "Harper Lee",
                                 "A story about racial injustice in the Deep South.");
@@ -54,4 +56,20 @@ public class BookControllerTest {
                                 .andExpect(jsonPath("$.title").value("To Kill a Mockingbird")); // Check 1 book field
 
         }
+
+        @Test
+        public void getBooksByAuthor_ShouldReturn200WithBooks() throws Exception {
+                // Given
+                String author = "J.K. Rowling";
+                Book book = new Book("HP 1", author, "...");
+                when(bookService.getBooksByAuthor(author)).thenReturn(Arrays.asList(book));
+
+                // When & Then
+                mockMvc.perform(get("/api/books")
+                                .param("author", author))
+                                .andExpect(status().isOk())
+                                .andExpect(jsonPath("$[0].title").value("HP 1"))
+                                .andExpect(jsonPath("$[0].author").value(author));
+        }
+
 }

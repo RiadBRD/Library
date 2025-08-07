@@ -3,12 +3,18 @@ package com.project.Library.service;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.project.Library.exceptions.InvalidBookException;
@@ -47,6 +53,21 @@ public class BookServiceTest {
         Book invalidBook = new Book("", "Author", "Synopsis");
         assertThrows(InvalidBookException.class,
                 () -> bookService.createBook(invalidBook));
+    }
+
+    @Test
+    public void getBooksByAuthor_ShouldReturnFilteredBooks() {
+        String author = "J.K. Rowling";
+        Book book1 = new Book("HP 1", author, "...");
+        Book book2 = new Book("HP 2", author, "...");
+
+        List<Book> expectedBooks = Arrays.asList(book1,book2);
+
+        when(bookRepository.findByAuthor(author)).thenReturn(expectedBooks);
+
+        List<Book> result = bookService.getBooksByAuthor(author);
+
+        assertThat(result).hasSize(2).allMatch(b->b.getAuthor().equals(author));
     }
 
 }
