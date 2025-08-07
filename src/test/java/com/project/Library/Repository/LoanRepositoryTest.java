@@ -1,4 +1,4 @@
-package com.project.Library.Repository;
+package com.project.Library.repository;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import com.project.Library.model.Book;
 import com.project.Library.model.Loan;
 import com.project.Library.model.User;
+import com.project.Library.repository.LoanRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

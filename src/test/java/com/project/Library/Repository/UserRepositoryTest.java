@@ -1,4 +1,4 @@
-package com.project.Library.Repository;
+package com.project.Library.repository;
 
 import java.util.Optional;
 
@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.project.Library.model.User;
+import com.project.Library.repository.UserRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
