@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+import com.project.Library.model.Book;
+import com.project.Library.model.Loan;
+import com.project.Library.model.User;
+
 public class LoanTest {
 
     @Test

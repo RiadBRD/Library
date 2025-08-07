@@ -1,0 +1,25 @@
+package com.project.Library.service;
+
+import com.project.Library.exceptions.InvalidBookException;
+import com.project.Library.model.Book;
+import com.project.Library.repository.BookRepository;
+
+public class BookServiceImpl implements BookService {
+
+    private BookRepository bookRepository;
+
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    @Override
+    public Book createBook(Book book) throws InvalidBookException {
+        if (book.getTitle().isEmpty() || book.getTitle().isBlank() || book.getTitle().equals("")) {
+            throw new InvalidBookException("Le livre ne contient pas de titre");
+        }
+
+        return bookRepository.save(book);
+
+    }
+
+}

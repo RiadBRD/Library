@@ -1,0 +1,10 @@
+package com.project.Library.exceptions;
+
+
+public class InvalidUserException extends RuntimeException{
+
+    public InvalidUserException(String message) {
+        super(message);
+    }
+
+}
