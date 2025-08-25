@@ -9,12 +9,14 @@ pipeline {
 
         stage('Build') {
             steps {
+                cd 'backend'
                 bat 'mvn clean package'
             }
         }
 
         stage('Test') {
             steps {
+                cd 'backend'
                 bat 'mvn test'
             }
         }
