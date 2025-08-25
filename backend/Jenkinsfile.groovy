@@ -26,7 +26,7 @@ pipeline {
 
     post {
         success {
-            echo 'Build et tests réussis !'
+            echo 'Build et tests réussis'
         }
 
         failure {
