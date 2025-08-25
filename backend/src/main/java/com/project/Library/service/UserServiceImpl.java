@@ -1,7 +1,5 @@
 package com.project.Library.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.project.Library.exceptions.InvalidUserException;
@@ -28,10 +26,7 @@ public class UserServiceImpl implements UserService {
         
     }
 
-    @Override
-    public List<User> getAllUser() {
-        return userRepository.findAll();
-    }
+    
 
     
 
