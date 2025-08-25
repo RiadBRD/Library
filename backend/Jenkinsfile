@@ -1,28 +1,42 @@
 pipeline {
     agent any
+
+    triggers {
+        // Enables GitHub webhook trigger
+        githubPush()
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git(branch: 'main', url: 'https://github.com/RiadBRD/Library.git')
+                // Checkout your main branch automatically
+                checkout([$class: 'GitSCM', 
+                          branches: [[name: '*/main']], 
+                          userRemoteConfigs: [[url: 'https://github.com/RiadBRD/Library.git']]])
             }
         }
 
         stage('Build') {
-            sh 'mvn clean package'
+            steps {
+                echo 'Building the project...'
+                sh 'mvn clean package'
+            }
         }
 
         stage('Test') {
-            sh 'mvn test'
+            steps {
+                echo 'Running tests...'
+                sh 'mvn test'
+            }
         }
     }
 
     post {
         success {
-            echo 'Build et tests réussis'
+            echo '✅ Build and tests succeeded!'
         }
-
         failure {
-            echo 'Le build a échoué'
+            echo '❌ Build failed!'
         }
     }
 }
