@@ -16,7 +16,7 @@ pipeline {
 
         stage('Test') {
             sh 'mvn test'
-        }A
+        }
 
         stage('Archive') {
             archiveArtifacts artifacts : 'target/*.jar',
