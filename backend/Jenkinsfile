@@ -21,11 +21,11 @@ pipeline {
 
     post {
         success {
-            echo 'Build et tests réussis'
+            echo 'Build et tests réussis !'
         }
 
         failure {
-            echo 'Le build a échoué'
+            echo 'Le build a échoué !'
         }
     }
 }
