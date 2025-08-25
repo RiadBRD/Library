@@ -1,32 +1,31 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout') {
             steps {
-                git(branch: 'main', url: 'https://github.com/RiadBRD/Library.git')
+                git 'https://github.com/RiadBRD/Library.git'
             }
         }
 
         stage('Build') {
             steps {
-                cd 'backend'
-                bat 'mvn clean package'
+                dir('backend') {
+                    bat 'mvn clean package'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                cd 'backend'
-                bat 'mvn test'
+                dir('backend') {
+                    bat 'mvn test'
+                }
             }
         }
     }
 
     post {
-        success {
-            echo 'Build et tests réussis'
-        }
-
         failure {
             echo 'Le build a échoué'
         }
