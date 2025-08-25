@@ -30,7 +30,7 @@ pipeline {
         }
 
         failure {
-            echo 'Le build a échoué'
+            echo 'Le build a échoué !'
         }
     }
 }
